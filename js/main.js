@@ -1,6 +1,6 @@
 //Jason Bentley
-//MiU 1207 
-//Project 3
+//ASD 1209 
+//Project 1
 
 
 
@@ -15,37 +15,40 @@ $(document).bind("pageinit", function(){
 		},
 		submitHandler: function(){
 			var data = arform.serializeArray();
+			localStorage.setItem("arform", data);
 			parseRecipeForm(data);
-			storeData();
+			// storeData();
 
 		}
 	});
 	
 	//Get ElementById function
-	function gE(x){
-		var theElement = document.getElementById(x);
-		return theElement;
-	}
+	// function gE(x){
+	// 	var theElement = document.getElementById(x);
+	// 	return theElement;
+	// }
 
-// function toggleControls(n){
-// 		switch(n){
-// 			case "on":
-// 				gE("addRecipeForm").style.display = "none";
-// 				gE("clear").style.display = "inline";
-// 				gE("display").style.display = "none";
-// 				gE("addNew").style.display = "inline";
-// 				break;
-// 			case "off":
-// 				gE("addRecipeForm").style.display = "block";
-// 				gE("clear").style.display = "inline";
-// 				gE("display").style.display = "inline";
-// 				gE("addNew").style.display = "none";
-// 				gE("items").style.display = "none";
-// 				break;
-// 			default:
-// 				return false;
-// 		}
-// 	}
+function toggleControls(n){
+		switch(n){
+			case "on":
+				$("#addRecipeForm").hide();
+				$("#clear").show();
+				$("#display1").hide();
+				$("#addNew").show();
+				break;
+			case "off":
+				
+				// $("#addRecipe").show();
+				$("#addRecipeForm").show();
+				$("#clear").show();
+				$("#display1").show();
+				$("#addNew").hide();
+				$("#items").hide();
+				break;
+			default:
+				return false;
+		}
+	}
 	
 
 	function getCheckboxValues(){
@@ -76,48 +79,51 @@ $(document).bind("pageinit", function(){
 		//Get all of our form field value and store in an object.
 		//Object properties contain array with the form label and input values.
 		var item 			= {};
-			item.recipename	= ["Recipe Name:", gE("recipename").value];
-			item.groups 	= ["Group: ",gE("groups").value];
-			item.rating		= ["Rating: ", gE("rating").value];
-			item.date		= ["Date Added: ", gE("date").value];
+			item.recipename	= ["Recipe Name:", $("#recipename").val()];
+			item.groups 	= ["Group: ",$("#groups").val()];
+			item.rating		= ["Rating: ", $("#rating").val()];
+			item.date		= ["Date Added: ", $("#date").val()];
 			item.checks 	= ["Meal Time: " , tcheckedBoxes];
-			item.directions = ["Directions: ", gE("directions").value];
+			item.directions = ["Directions: ", $("#directions").val()];
 		//Save data into Local Storage: Use Stringify to convert the object to a string.
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Recipe Saved!");
-		window.location="index.html";
+		window.location.reload();
+		
 	}
 	function getData(){
+
+		// toggleControls("on");
 
 		if(localStorage.length === 0){
 			alert("There are no recipes to display! Default Data has been populated!");
 			autoFillData();			
 		}
-		var makeDiv = document.createElement("div");
-		makeDiv.setAttribute("id", "items");
-		var makeList = document.createElement("ul");
+		var makeDiv = $("<div>");
+		makeDiv.attr("id", "items");
+		var makeList = $("<ul>");
 
-		makeDiv.appendChild(makeList);
-		document.getElementById("displayTarget").appendChild(makeDiv);
-		gE("items").style.display = "block";
+		makeDiv.append(makeList);
+		$("#displayTarget").append(makeDiv);
+		$("#items").show();
 		for(var i=0, len=localStorage.length; i<len;i++){
-			var makeLi = document.createElement("li");
-			makeLi.setAttribute("id", "ele");
-			var linksLi= document.createElement("li");
-			linksLi.setAttribute("id", "dL");
-			makeList.appendChild(makeLi);
+			var makeLi = $("<li>");
+			// makeLi.setAttribute("id", "ele");
+			var linksLi= $("<li>");
+			// linksLi.setAttribute("id", "dL");
+			makeList.append(makeLi);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
 			var obj = JSON.parse(value);
-			var makeSublist = document.createElement("ul");
-			makeLi.appendChild(makeSublist);
+			var makeSublist = $("<ul>");
+			makeLi.append(makeSublist);
 			getImage(obj.groups[1], makeSublist);
 			for(var n in obj){
-				var makeSubli = document.createElement("li");
-				makeSublist.appendChild(makeSubli);
+				var makeSubli = $("<li>");
+				makeSublist.append(makeSubli);
 				var optSubText = obj[n][0]+" "+obj[n][1];
-				makeSubli.innerHTML = optSubText;
-				makeSublist.appendChild(linksLi);
+				makeSubli.text(optSubText);
+				makeSublist.append(linksLi);
 
 			}
 
@@ -127,11 +133,11 @@ $(document).bind("pageinit", function(){
 	}
 	//get image for category
 	function getImage(catName, makeSublist){
-		var imageLi = document.createElement("li");
-		makeSublist.appendChild(imageLi);
-		var newImg = document.createElement("img");
-		var setSrc = newImg.setAttribute("src", "images/"+ catName + ".png");
-		imageLi.appendChild(newImg);
+		var imageLi = $("<li>");
+		makeSublist.append(imageLi);
+		var newImg = $("<img>");
+		var setSrc = newImg.attr("src", "images/"+ catName + ".png");
+		imageLi.append(newImg);
 	}
 	//Auto Populate Local Storage
 	function autoFillData(){
@@ -146,46 +152,48 @@ $(document).bind("pageinit", function(){
 	//Make Item Links
 	//Create edit and delete links for eachstored item when disp
 	function makeItemLinks(key, linksLi){
-		var editLink = document.createElement("a");
-		editLink.href = "#addRecipe";
-		editLink.key = key;
+		var editLink = $("<a>");
+		editLink.attr("href", "#");
+		editLink.attr("key", key);
 		var editText = "Edit Recipe";
-		editLink.addEventListener("click", editItem);
-		editLink.innerHTML = editText;
-		linksLi.appendChild(editLink);
+		editLink.on("click", editItem);
+		editLink.text(editText);
+		linksLi.append(editLink);
 
 		//add line break
-		var breakTag = document.createElement("br");
+		var breakTag = $("<br>");
 		
-		linksLi.appendChild(breakTag);
+		linksLi.append(breakTag);
 
 
 		//add delete single item link
-		var deleteLink = document.createElement("a");
-		deleteLink.href = "#display1";
-		deleteLink.key = key;
+		var deleteLink = $("<a>");
+		deleteLink.attr("href", "#");
+		deleteLink.attr("key", key);
 		var deleteText = "Delete Recipe";
-		deleteLink.addEventListener("click", deleteItem);
-		deleteLink.innerHTML = deleteText;
-		linksLi.appendChild(deleteLink);
+		deleteLink.on("click", deleteItem);
+		deleteLink.text(deleteText);
+		linksLi.append(deleteLink);
 
 
 	}
 
-	function editItem(){
+	function editItem(key){
 		//grab data from item in l storage
-		var value = localStorage.getItem(this.key);
+		var value = localStorage.getItem(key);
 		var item = JSON.parse(value);
 
 		//Show form
-		// toggleControls("off");
+		toggleControls("off");
 
 		//Populate form fields w/current lstorage vals
-		gE("groups").value = item.groups[1];
-		gE("recipename").value = item.recipename[1];
-		gE("rating").value = item.rating[1];
-		gE("date").value = item.date[1];
-		gE("directions").value = item.directions[1];
+
+		
+		$("#recipename").val(item.recipename[1]);
+		$("#groups").val(item.groups[1]);
+		$("#rating").val(item.rating[1]);
+		$("#date").val(item.date[1]);
+		$("#directions").val(item.directions[1]);
 		
 		var placeValues = function(){
 			var checkboxes = document.getElementById("addRecipeForm").mealTime;
@@ -201,18 +209,18 @@ $(document).bind("pageinit", function(){
 		placeValues();
 		// console.log(item.checks);
 		
-		
+		// alert("yo");
 
 		//remove initial listener from the input 'save recipe' button
-		save.removeEventListener("click", storeData);
+		save.off("click", storeData);
 		//Change submit button value to Edit Button
-		gE("submit").value = "Save Edited Recipe";
-		var editSubmit = gE("submit");
+		$("#submit").attr("value", "Save Edited Recipe");
+		var editSubmit = $("#submit");
 		//save the key value estab in this func as a prpty of the editSubmit event
 		//so we can use that value when we save the data we edited.
-		editSubmit.addEventListener("click", submit);
-		editSubmit.key = this.key;
-		// window.location="index.html#addRecipe";
+		editSubmit.on("click", submit);
+		editSubmit.attr ("key", this.key);
+		
 
 	};
 
@@ -223,7 +231,7 @@ $(document).bind("pageinit", function(){
 		if(ask){
 			localStorage.removeItem(this.key);
 			alert("Recipe was deleted!");
-			$("#display1").listview("refresh");
+			window.location.reload();
 			
 
 		}else{
@@ -239,12 +247,12 @@ $(document).bind("pageinit", function(){
 			if(ask){
 				localStorage.clear();
 				alert("All recipes are deleted!");
-				window.location="index.html";
+				
 				return false;
 			}else {
 				alert("No Recipes Deleted!");
 			}
-
+window.location.reload();
 		}
 		return false;
 	}
@@ -257,18 +265,18 @@ $(document).bind("pageinit", function(){
 	var parseRecipeForm = function(data){
 		//uses form data here
 		// console.log(data);
-		// storeData();
+		storeData();
 
 	};
 	
 
 	//Set Link and Submit Click Events
-	var displayLink = gE("display1");
-	displayLink.addEventListener("click", getData);
-	var clearLink = gE("clear");
-	clearLink.addEventListener("click", clearLocal);
-	var save = gE("submit");
-	save.addEventListener("click", submit);
+	var displayLink = $("#display1");
+	displayLink.on("click", getData);
+	var clearLink = $("#clear");
+	clearLink.on("click", clearLocal);
+	var save = $("#submit");
+	save.on("click", storeData);
 
 
 
