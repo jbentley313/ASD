@@ -1,12 +1,12 @@
 //Jason Bentley
-//ASD 1209 
+//ASD 1211 
 //Project 1
 
 
 
 
 //Wait until the DOM is ready
-$(document).bind("pageinit", function(){
+$(document).on("pageinit", function(){
 
 	var arform = $("#addRecipeForm");
 	arform.validate({
@@ -17,7 +17,7 @@ $(document).bind("pageinit", function(){
 			var data = arform.serializeArray();
 			localStorage.setItem("arform", data);
 			parseRecipeForm(data);
-			// storeData(data);
+			storeData(data);
 
 		}
 	});
@@ -63,36 +63,41 @@ function toggleControls(n){
 	
 
 	
-
-	function storeData(key){
-		//if no key, means brand new item that needs a key
-		if(!key){
-			var id 			= Math.floor(Math.random()*100000001);
-		}else{
-			//set id to existing key we are editing to save OVER data
-			//the key is same key that's been passed along from editSubmit event handler
-			//to the validate function, then passed here, into storeData function
-			id = key;
+	$('#addRecipe').on('pageinit', function() {
+		var save = $("#submit");
+		save.on("click", storeData);
+		
+		function storeData(key){
+			//if no key, means brand new item that needs a key
+			if(!key){
+				var id 			= Math.floor(Math.random()*100000001);
+			}else{
+				//set id to existing key we are editing to save OVER data
+				//the key is same key that's been passed along from editSubmit event handler
+				//to the validate function, then passed here, into storeData function
+				id = key;
+			}
+			getCheckboxValues();
+			//Get all of our form field value and store in an object.
+			//Object properties contain array with the form label and input values.
+			var item 			= {};
+				item.recipename	= ["Recipe Name:", $("#recipename").val()];
+				item.groups 	= ["Group: ",$("#groups").val()];
+				item.rating		= ["Rating: ", $("#rating").val()];
+				item.date		= ["Date Added: ", $("#date").val()];
+				item.checks 	= ["Meal Time: " , tcheckedBoxes];
+				item.directions = ["Directions: ", $("#directions").val()];
+			//Save data into Local Storage: Use Stringify to convert the object to a string.
+			localStorage.setItem(id, JSON.stringify(item));
+			alert("Recipe Saved!");
+			
+			window.location.reload();
+			
 		}
-		getCheckboxValues();
-		//Get all of our form field value and store in an object.
-		//Object properties contain array with the form label and input values.
-		var item 			= {};
-			item.recipename	= ["Recipe Name:", $("#recipename").val()];
-			item.groups 	= ["Group: ",$("#groups").val()];
-			item.rating		= ["Rating: ", $("#rating").val()];
-			item.date		= ["Date Added: ", $("#date").val()];
-			item.checks 	= ["Meal Time: " , tcheckedBoxes];
-			item.directions = ["Directions: ", $("#directions").val()];
-		//Save data into Local Storage: Use Stringify to convert the object to a string.
-		localStorage.setItem(id, JSON.stringify(item));
-		alert("Recipe Saved!");
-		
-		window.location.reload();
-		
-	}
+	});
 	function getData(){
 
+		$('#display1').empty();
 		toggleControls("on");
 
 		if(localStorage.length === 0){
@@ -278,14 +283,82 @@ function toggleControls(n){
 
 	//Set Link and Submit Click Events
 	var displayLink = $("#display1");
-	displayLink.one("click", getData);
+	displayLink.on("click", getData);
 	var clearLink = $("#clear");
-	clearLink.one("click", clearLocal);
-	var save = $("#submit");
-	save.one("click", storeData);
-
+	clearLink.on("click", clearLocal);
+	
+	
 
 
 	
 });
+$('#data').on('pageinit', function() {
 
+
+// JSON Data Loader
+    $('#Json').on("click", function(){
+	    console.log("Json");
+        $('#LoadedData').empty();
+        $.ajax({
+            url: 'xhr/recipes.JSON',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response){
+				console.log(response);
+				$.each(response, function(key, value) {
+					$(''+
+						'<div">' +
+							'<p>' + value.recipename[0] + " " + value.recipename[1] + '</p>' +
+							'<p>' + value.groups[0] + " " + value.groups[1] + '</p>' +
+							'<p>' + value.rating[0] + " " + value.rating[1] + '</p>' +
+							'<p>' + value.date[0] + " " + value.date[1] +  '</p>' +
+							'<p>' + value.checks[0] + " " + value.checks[1] + '</p>' +
+							'<p>' + value.directions[0] + " " + value.directions[1] + '</p>' +
+							'<hr />' +
+						'</div>'
+					).appendTo('#LoadedData');
+				});
+            },
+            error: function(msg) {
+            	console.log("Error.");
+            	console.log(msg);
+            }
+        });
+    });
+
+// XML Data Loader	
+	    $('#XML').on("click", function(){
+	   	console.log("XML");
+        $('#LoadedData').empty();
+        $.ajax({
+            url: 'xhr/recipes.xml',
+            type: 'GET',
+            dataType: 'xml',
+            success: function(xml){
+            	// console.log(xml);
+                $(xml).find('recipe').each(function(){
+                    var XMLRec = {};
+                    XMLRec.recipename = $(this).find('recipeName').text();
+                    XMLRec.group = $(this).find('group').text();
+                    XMLRec.rating = $(this).find('rating').text();
+                    XMLRec.date = $(this).find('date').text();
+                    XMLRec.checks = $(this).find('checks').text();
+                    XMLRec.directions = $(this).find('directions').text();
+                    $(' '+
+                        '<div>'+
+                            '<p>'+ 'Recipe name: ' + XMLRec.recipename +'</p>'+
+                            '<p>'+ 'Group: ' + XMLRec.group +'</p>'+
+                            '<p>'+ 'Rating: ' + XMLRec.rating +'</p>'+
+                            '<p>'+ 'Date: ' + XMLRec.date +'</p>'+
+                            '<p>'+ 'Meal Time: ' + XMLRec.checks +'</p>'+
+                            '<p>'+ 'Directions ' + XMLRec.directions +'</p>' +
+                            '<hr/>' +
+                            
+                        '</div>'
+                    ).appendTo('#LoadedData');
+                    console.log(xml);
+                });
+            },
+        });
+    });
+});
