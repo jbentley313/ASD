@@ -22,12 +22,6 @@ $(document).on("pageinit", function(){
 		}
 	});
 	
-	// Get ElementById function
-	// function gE(x){
-	// 	var theElement = document.getElementById(x);
-	// 	return theElement;
-	// }
-
 function toggleControls(n){
 		switch(n){
 			case "on":
@@ -50,16 +44,7 @@ function toggleControls(n){
 	}
 	
 
-	function getCheckboxValues(){
-		 	var	checkBoxes = document.getElementById("addRecipeForm").mealTime;
-				tcheckedBoxes = [];
-		for(var i=0; i<checkBoxes.length; i++){
-			if(checkBoxes[i].checked){
-			 newSelected = checkBoxes[i].value;
-			tcheckedBoxes.push(newSelected);
-			}	
-		}
-	}
+	
 	
 
 	
@@ -77,7 +62,21 @@ function toggleControls(n){
 				//to the validate function, then passed here, into storeData function
 				id = key;
 			}
+			function getCheckboxValues(){
+			 	var	checkBoxes = $("forms mealTime");
+					tcheckedBoxes = [];
+					for(var i=0; i<checkBoxes.length; i++){
+						if(checkBoxes[i].checked){
+						newSelected = checkBoxes[i].value;
+						tcheckedBoxes.push(newSelected);
+				}
+					
+		}
+		
+		
+	}
 			getCheckboxValues();
+			
 			//Get all of our form field value and store in an object.
 			//Object properties contain array with the form label and input values.
 			var item 			= {};
@@ -97,7 +96,6 @@ function toggleControls(n){
 	});
 	function getData(){
 
-		$('#display1').empty();
 		toggleControls("on");
 
 		if(localStorage.length === 0){
@@ -215,12 +213,9 @@ function toggleControls(n){
 			//console.log(item.checks);//console log to make sure the correct items have been saved
 		};
 		placeValues();
-		// console.log(item.checks);
 		
-		// alert("yo");
-
-		//remove initial listener from the input 'save recipe' button
-		save.off("click", storeData);
+				//remove initial listener from the input 'save recipe' button
+		$('#submit').off("click", storeData);
 		//Change submit button value to Edit Button
 		$("#submit").attr("value", "Save Edited Recipe");
 		var editSubmit = $("#submit");

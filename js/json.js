@@ -1,6 +1,3 @@
-//Jason Bentley
-//MiU 1207 
-//Project 2
 
 var json = {
 	"Recipe1" : {
