@@ -96,6 +96,7 @@ function toggleControls(n){
 	});
 	function getData(){
 
+		
 		toggleControls("on");
 
 		if(localStorage.length === 0){
