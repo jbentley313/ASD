@@ -15,13 +15,15 @@ $(document).on("pageinit", function(){
 		},
 		submitHandler: function(){
 			var data = arform.serializeArray();
-			localStorage.setItem("arform", data);
+			/* localStorage.setItem("arform", data); */
 			parseRecipeForm(data);
 			storeData(data);
+			console.log('submit handler');
 
 		}
 	});
 	
+/*
 function toggleControls(n){
 		switch(n){
 			case "on":
@@ -42,6 +44,7 @@ function toggleControls(n){
 				return false;
 		}
 	}
+*/
 	
 
 	
@@ -52,7 +55,9 @@ function toggleControls(n){
 		var save = $("#submit");
 		save.on("click", storeData);
 		
+		
 		function storeData(key){
+		console.log("storeData");
 			//if no key, means brand new item that needs a key
 			if(!key){
 				var id 			= Math.floor(Math.random()*100000001);
@@ -63,7 +68,8 @@ function toggleControls(n){
 				id = key;
 			}
 			function getCheckboxValues(){
-			 	var	checkBoxes = $("forms mealTime");
+			 	var	checkBoxes = $("forms:checkboxes");
+			 	console.log(checkBoxes);
 					tcheckedBoxes = [];
 					for(var i=0; i<checkBoxes.length; i++){
 						if(checkBoxes[i].checked){
@@ -93,11 +99,19 @@ function toggleControls(n){
 			window.location.reload();
 			
 		}
+		//parseRecipeForm function only worked down here, not at top
+	var parseRecipeForm = function(data){
+		//uses form data here
+		// console.log(data);
+		storeData(data);
+
+
+	};
 	});
 	function getData(){
 
 		
-		toggleControls("on");
+		/* toggleControls("on"); */
 
 		if(localStorage.length === 0){
 			alert("There are no recipes to display! Default Data has been populated!");
@@ -186,16 +200,17 @@ function toggleControls(n){
 	}
 
 	function editItem(key){
+	console.log('edit item fired');
 		//grab data from item in l storage
 		var value = localStorage.getItem(key);
 		var item = JSON.parse(value);
 
 		//Show form
-		toggleControls("off");
+		/* toggleControls("off"); */
 
 		//Populate form fields w/current lstorage vals
 
-		
+		console.log(value.key);
 		$("#recipename").val(item.recipename[1]);
 		$("#groups").val(item.groups[1]);
 		$("#rating").val(item.rating[1]);
@@ -203,7 +218,8 @@ function toggleControls(n){
 		$("#directions").val(item.directions[1]);
 		
 		var placeValues = function(){
-			var checkboxes = document.getElementById("addRecipeForm").mealTime;
+			var checkboxes = $("form: checkboxes");
+			console.log(checkboxes);
 			for(i=0, j=checkboxes.length; i<j; i++){
 				for(n=0, m=item.checks[1].length; n<m; n++){
 					if(checkboxes[i].value === item.checks[1][n]){
@@ -267,14 +283,12 @@ function toggleControls(n){
 	//Variable Defaults
 	var tcheckedBoxes
 	;
-	//parseRecipeForm function only worked down here, not at top
+	
 	var parseRecipeForm = function(data){
-		//uses form data here
-		// console.log(data);
-		storeData(data);
-
-
-	};
+			//uses form data here
+			// console.log(data);
+	
+			};
 	
 
 	//Set Link and Submit Click Events

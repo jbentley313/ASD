@@ -11,7 +11,7 @@ $(document).on("pageinit", function(){
 	var arform = $("#addRecipeForm");
 	arform.validate({
 		invalidHandler: function(form, validator){
-			
+
 		},
 		submitHandler: function(){
 			var data = arform.serializeArray();
@@ -21,37 +21,12 @@ $(document).on("pageinit", function(){
 
 		}
 	});
-	
-function toggleControls(n){
-		switch(n){
-			case "on":
-				$("#addRecipe").hide();
-				$("#clear").show();
-				$("#display1").hide();
-				$("#addNew").show();
-				break;
 
-			case "off":
-				$("#addRecipe").show();
-				$("#clear").show();
-				$("#display1").show();
-				$("#addNew").hide();
-				$("#items").hide();
-				break;
-			default:
-				return false;
-		}
-	}
-	
 
-	
-	
-
-	
 	$('#addRecipe').on('pageinit', function() {
 		var save = $("#submit");
 		save.on("click", storeData);
-		
+
 		function storeData(key){
 			//if no key, means brand new item that needs a key
 			if(!key){
@@ -70,13 +45,13 @@ function toggleControls(n){
 						newSelected = checkBoxes[i].value;
 						tcheckedBoxes.push(newSelected);
 				}
-					
+
 		}
-		
-		
+
+
 	}
 			getCheckboxValues();
-			
+
 			//Get all of our form field value and store in an object.
 			//Object properties contain array with the form label and input values.
 			var item 			= {};
@@ -89,15 +64,13 @@ function toggleControls(n){
 			//Save data into Local Storage: Use Stringify to convert the object to a string.
 			localStorage.setItem(id, JSON.stringify(item));
 			alert("Recipe Saved!");
-			
+
 			window.location.reload();
-			
+
 		}
 	});
 	function getData(){
 
-		
-		toggleControls("on");
 
 		if(localStorage.length === 0){
 			alert("There are no recipes to display! Default Data has been populated!");
@@ -155,7 +128,7 @@ function toggleControls(n){
 		// $(‘#display1’).listview(‘refresh’);
 	}
 
-	
+
 	//Make Item Links
 	//Create edit and delete links for eachstored item when disp
 	function makeItemLinks(key, linksLi){
@@ -169,7 +142,7 @@ function toggleControls(n){
 
 		//add line break
 		var breakTag = $("<br>");
-		
+
 		linksLi.append(breakTag);
 
 
@@ -191,17 +164,17 @@ function toggleControls(n){
 		var item = JSON.parse(value);
 
 		//Show form
-		toggleControls("off");
+		/* toggleControls("off"); */
 
 		//Populate form fields w/current lstorage vals
 
-		
+
 		$("#recipename").val(item.recipename[1]);
 		$("#groups").val(item.groups[1]);
 		$("#rating").val(item.rating[1]);
 		$("#date").val(item.date[1]);
 		$("#directions").val(item.directions[1]);
-		
+
 		var placeValues = function(){
 			var checkboxes = document.getElementById("addRecipeForm").mealTime;
 			for(i=0, j=checkboxes.length; i<j; i++){
@@ -214,7 +187,7 @@ function toggleControls(n){
 			//console.log(item.checks);//console log to make sure the correct items have been saved
 		};
 		placeValues();
-		
+
 				//remove initial listener from the input 'save recipe' button
 		$('#submit').off("click", storeData);
 		//Change submit button value to Edit Button
@@ -224,11 +197,11 @@ function toggleControls(n){
 		//so we can use that value when we save the data we edited.
 		editSubmit.on("click", submit);
 		editSubmit.attr ("key", this.key);
-		
+
 
 	};
 
-	
+
 
 	function deleteItem(){
 		var ask = confirm("Are you sure you want to delete this recipe?");
@@ -236,7 +209,7 @@ function toggleControls(n){
 			localStorage.removeItem(this.key);
 			alert("Recipe was deleted!");
 			window.location.reload();
-			
+
 
 		}else{
 			alert("Recipe was NOT deleted.");
@@ -251,7 +224,7 @@ function toggleControls(n){
 			if(ask){
 				localStorage.clear();
 				alert("All recipes are deleted!");
-				
+
 				return false;
 			}else {
 				alert("No Recipes Deleted!");
@@ -260,9 +233,9 @@ function toggleControls(n){
 		}
 		return false;
 	}
-	
 
-	
+
+
 
 	//Variable Defaults
 	var tcheckedBoxes
@@ -275,32 +248,32 @@ function toggleControls(n){
 
 
 	};
-	
+
 
 	//Set Link and Submit Click Events
 	var displayLink = $("#display1");
 	displayLink.on("click", getData);
 	var clearLink = $("#clear");
 	clearLink.on("click", clearLocal);
-	
-	
 
 
-	
+
+
+
 });
 $('#data').on('pageinit', function() {
 
 
 // JSON Data Loader
     $('#Json').on("click", function(){
-	    console.log("Json");
+	    console.log("Json Data!!");
         $('#LoadedData').empty();
         $.ajax({
             url: 'xhr/recipes.JSON',
             type: 'GET',
             dataType: 'json',
             success: function(response){
-				console.log(response);
+				
 				$.each(response, function(key, value) {
 					$(''+
 						'<div">' +
@@ -313,6 +286,7 @@ $('#data').on('pageinit', function() {
 							'<hr />' +
 						'</div>'
 					).appendTo('#LoadedData');
+					console.log(response);
 				});
             },
             error: function(msg) {
@@ -321,10 +295,41 @@ $('#data').on('pageinit', function() {
             }
         });
     });
+    
+    
+//CSV Loader    
+    $('#CSV').on("click", function(){
+    	console.log("CSV Data!!");
+        $('#LoadedData').empty();
+        $.ajax({
+            url: 'xhr/recipes.csv',
+            type: 'GET',
+            dataType: 'text',
+            success: function(data){
+                var lines = data.split("\n");
+                for (var lineNum = 0; lineNum < lines.length; lineNum++) {
+                    var row = lines[lineNum];
+                    var columns = row.split(",");
+                    console.log(columns);
+                    $(''+
+                        '<div>'+
+                            '<p>' + 'Recipe Name: ' + columns[0] +'</p>'+
+                            '<p>' + 'Rating: ' + columns[1] +'</p>'+
+                            '<p>' + 'Meal Time: ' + columns[2] +'</p>'+
+                            '<p>' + 'Date Added: ' + columns[3] +'</p>'+
+                            '<p>' + 'Directions: ' + columns[4] +'</p>'+
+                            '<hr />' +
+                        '</div>'
+                    ).appendTo('#LoadedData');
+                    console.log(data);
+                }
+            },
+        });
+    });
 
 // XML Data Loader	
 	    $('#XML').on("click", function(){
-	   	console.log("XML");
+	   	console.log("XML Data!!");
         $('#LoadedData').empty();
         $.ajax({
             url: 'xhr/recipes.xml',

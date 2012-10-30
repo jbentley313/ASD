@@ -11,43 +11,43 @@
         <directions>Cook some XML Pizza</directions>
     </recipe>
     <recipe>
-        <recipeName>XML Pizza!</recipeName>
+        <recipeName>Hot Dogs!</recipeName>
         <group>Beef</group>
         <rating>10</rating>
         <checks>dinner</checks>
         <date>2012-05-04</date>
-        <directions></directions>
+        <directions>Cook some hotdogs</directions>
     </recipe>
     <recipe>
-        <recipeName>30127</recipeName>
-        <group>Now</group>
+        <recipeName>Eggs</recipeName>
+        <group>Veggie</group>
         <rating>3</rating>
-        <checks>Great Work!</checks>
+        <checks>breakfast</checks>
         <date>2011/03/21</date>
-        <directions></directions>
+        <directions>cook eggs</directions>
     </recipe>
     <recipe>
-        <recipeName>30080</recipeName>
-        <group>Que</group>
+        <recipeName>Ribs</recipeName>
+        <group>Pork</group>
         <rating>4</rating>
-        <checks>Great Work!</checks>
+        <checks>dinner</checks>
         <date>2012/05/05</date>
-        <directions></directions>
+        <directions>cook ribs</directions>
     </recipe>
     <recipe>
-        <recipeName>30062</recipeName>
-        <group>Now</group>
+        <recipeName>some recipe</recipeName>
+        <group>Veggie</group>
         <rating>5</rating>
-        <checks>Great Work!</checks>
+        <checks>breakfast</checks>
         <date>2012/01/19</date>
-        <directions></directions>
+        <directions>cook something!</directions>
     </recipe>
     <recipe>
-        <recipeName>30060</recipeName>
-        <group>Que</group>
+        <recipeName>pep bread</recipeName>
+        <group>beef</group>
         <rating>6</rating>
-        <checks>Great Work!</checks>
+        <checks>appetier</checks>
         <date>2012/08/06</date>
-        <directions></directions>
+        <directions>pep bread cooking directions go here</directions>
     </recipe>
 </allrecipes>
