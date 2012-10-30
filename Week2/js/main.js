@@ -307,7 +307,7 @@ $('#data').on('pageinit', function() {
             dataType: 'text',
             success: function(data){
                 var lines = data.split("\n");
-                for (var lineNum = 0; lineNum < lines.length; lineNum++) {
+                for (var lineNum = 1; lineNum < lines.length; lineNum++) {
                     var row = lines[lineNum];
                     var columns = row.split(",");
                     console.log(columns);
