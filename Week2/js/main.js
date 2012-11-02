@@ -1,6 +1,6 @@
 //Jason Bentley
 //ASD 1211 
-//Project 1
+//Project 2
 
 
 
@@ -17,7 +17,8 @@ $(document).on("pageinit", function(){
 			var data = arform.serializeArray();
 			localStorage.setItem("arform", data);
 			parseRecipeForm(data);
-			storeData(data);
+			storeData();
+			
 
 		}
 	});
@@ -38,15 +39,17 @@ $(document).on("pageinit", function(){
 				id = key;
 			}
 			function getCheckboxValues(){
-			 	var	checkBoxes = $("forms mealTime");
+			 	var	checkBoxes = $(":checkbox");
 					tcheckedBoxes = [];
 					for(var i=0; i<checkBoxes.length; i++){
 						if(checkBoxes[i].checked){
 						newSelected = checkBoxes[i].value;
 						tcheckedBoxes.push(newSelected);
 				}
+				
 
 		}
+		
 
 
 	}
@@ -125,7 +128,7 @@ $(document).on("pageinit", function(){
 			localStorage.setItem(id, JSON.stringify(json[n]));
 
 		}
-		// $(‘#display1’).listview(‘refresh’);
+		
 	}
 
 
@@ -176,7 +179,7 @@ $(document).on("pageinit", function(){
 		$("#directions").val(item.directions[1]);
 
 		var placeValues = function(){
-			var checkboxes = document.getElementById("addRecipeForm").mealTime;
+			var checkboxes = $('Meal Time');
 			for(i=0, j=checkboxes.length; i<j; i++){
 				for(n=0, m=item.checks[1].length; n<m; n++){
 					if(checkboxes[i].value === item.checks[1][n]){
@@ -273,7 +276,7 @@ $('#data').on('pageinit', function() {
             type: 'GET',
             dataType: 'json',
             success: function(response){
-				
+
 				$.each(response, function(key, value) {
 					$(''+
 						'<div">' +

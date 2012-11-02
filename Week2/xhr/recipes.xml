@@ -7,7 +7,7 @@
         <group>Chicken</group>
         <rating>9</rating>
         <checks>dinner</checks>
-        <date>2012/08/01</date>
+        <date>2012/08/11</date>
         <directions>Cook some XML Pizza</directions>
     </recipe>
     <recipe>
@@ -15,7 +15,7 @@
         <group>Beef</group>
         <rating>10</rating>
         <checks>dinner</checks>
-        <date>2012-05-04</date>
+        <date>2012-05-14</date>
         <directions>Cook some hotdogs</directions>
     </recipe>
     <recipe>
@@ -39,15 +39,15 @@
         <group>Veggie</group>
         <rating>5</rating>
         <checks>breakfast</checks>
-        <date>2012/01/19</date>
+        <date>2012/01/23</date>
         <directions>cook something crazy tasty!</directions>
     </recipe>
     <recipe>
         <recipeName>pep bread</recipeName>
         <group>beef</group>
         <rating>6</rating>
-        <checks>appetier</checks>
-        <date>2012/08/06</date>
+        <checks>appetizer</checks>
+        <date>2012/08/16</date>
         <directions>pep bread cooking directions go here</directions>
     </recipe>
 </allrecipes>
