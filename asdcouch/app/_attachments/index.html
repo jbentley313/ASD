@@ -38,7 +38,7 @@
 				<img src="images/sushi2.png" height="100" width="270">
 			</p>
 			<a href="#addRecipe" data-role="button" id="addNew" data-icon="plus" data-iconpos="right" >Add a Recipe Now!</a>
-			<a href="#display1"  data-role="button" id="display1" data-icon="star" data-iconpos="right">My Recipe Book</a>		
+			<a href="#remoteData"  data-role="button" id="allrecipes" data-icon="star" data-iconpos="right">My Recipe Book</a>		
 		</div>
 
 
@@ -46,31 +46,31 @@
 		<div data-role="content" data-theme="a">
 			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Recipes..." data-theme="a">
 				<li data-role="list-divider">Browse Recipes by...</li>
-				<li><a href="#remoteData" id="chicken" data-transition="slide">
+				<li><a href="#remoteData" id="chickenNav" data-transition="slide">
 					<p class="my_icon_wrapper">
 						<img src="images/chickenIconSmall.png">
 						<h3>Chicken</h3>
 					</p>
 				</a></li>
-				<li><a href="#remoteData" id="beef" data-transition="slide">
+				<li><a href="#remoteData" id="beefNav" data-transition="slide">
 					<p class="my_icon_wrapper">
 						<img src="images/beefIconSmall.png">
 						<h3>Beef</h3>
 					</p>
 				</a></li>
-				<li><a href="#remoteData" id="pork" data-transition="slide">
+				<li><a href="#remoteData" id="porkNav" data-transition="slide">
 					<p class="my_icon_wrapper">
 						<img src="images/porkIconSmall.png">
 						<h3>Pork</h3>
 					</p>
 				</a></li>
-				<li><a href="#remoteData" id="veggie" data-transition="slide">
+				<li><a href="#remoteData" id="veggieNav" data-transition="slide">
 					<p class="my_icon_wrapper">
 						<img src="images/veggieIconSmall.png">
 						<h3>Veggie</h3>
 					</p>
 				</a></li>
-				<li><a href="#" id="date" data-transition="slide">
+				<li><a href="#byDate" id="dateNav" data-transition="slide">
 					<p class="my_icon_wrapper">
 						<img src="images/dateIcon.png">
 						<h3>Date Added</h3>
@@ -117,15 +117,15 @@
 		
 	</div>
 
-	<!-- generic landing page (for now) -->
+	<!-- remote data landing page (for now) -->
 	<div data-role="page" id="remoteData" data-add-back-btn="true" data-theme="a">
 
 		<div data-role="header" data-position="fixed">
-			<h1>Coming Soon</h1>
+			<h1>Browse Recipes</h1>
 		</div>
 
 		<div data-role="content">
-			<ul id="recipeList" data-role="listview">
+			<ul id="recipeList" data-role="listview" data-filter="true" data-filter-placeholder="Search Recipes..." >
 			</ul>
 		</div>
 

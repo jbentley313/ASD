@@ -5,128 +5,156 @@
 
 
 //Wait until the DOM is ready
-$(document).on("pageinit", function(){
-
+$("#home").on("pageinit", function(){
 	
 
-// JSON Data Loader
-    $('#chicken').on("click", function(){
-    	$('#recipeList').empty();
-	    console.log("Chicken Data!!");
+
+	$('#chickenNav').on("click", function(){
+	    console.log("Json Data!!");
+        $('#recipeList').empty();
         $.ajax({
             "url": '_view/chicken',
+            "type": 'GET',
             "dataType": 'json',
-            "success": function(data){
+            "success": function(response){
 
-				$.each(data.rows, function(index, recipe) {
-					var RecipeName = recipe.value.RecipeName;
-					$('#recipeList').append(
-						$('<li>').append(
-							$('<a>').attr("href", "#")
-								.text(RecipeName)
-						)
-					);
+				$.each(response.rows, function(index, recipe) {
+					$(''+
+						'<div>' +
+							'<p>' + recipe.value.RecipeName +'</p>' +
+							'<p>' + 'Rating: ' + recipe.value.Rating +'</p>' +
+							'<p>' + 'Meal Time: ' + recipe.value.MealTime +'</p>' +
+							'<p>' + 'Directions: ' + recipe.value.Directions +'</p>' +
+							'<hr />' +
+						'</div>'
+					).appendTo('#recipeList');
+					console.log(response);
 				});
-				$('#recipeList').listview('refresh');
+            },
+            error: function(msg) {
+            	console.log("Error.");
+            	console.log(msg);
             }
-            
         });
-
     });	
     
-    $('#beef').on("click", function(){
-    	$('#recipeList').empty();
-	    console.log("Beef Data!!");
+	$('#beefNav').on("click", function(){
+	    console.log("Json Data!!");
+        $('#recipeList').empty();
         $.ajax({
             "url": '_view/beef',
+            "type": 'GET',
             "dataType": 'json',
-            "success": function(data){
+            "success": function(response){
 
-				$.each(data.rows, function(index, recipe) {
-					var RecipeName = recipe.value.RecipeName;
-					$('#recipeList').append(
-						$('<li>').append(
-							$('<a>').attr("href", "#")
-								.text(RecipeName)
-						)
-					);
+				$.each(response.rows, function(index, recipe) {
+					$(''+
+						'<div>' +
+							'<p>' + recipe.value.RecipeName +'</p>' +
+							'<p>' + 'Rating: ' + recipe.value.Rating +'</p>' +
+							'<p>' + 'Meal Time: ' + recipe.value.MealTime +'</p>' +
+							'<p>' + 'Directions: ' + recipe.value.Directions +'</p>' +
+							'<hr />' +
+						'</div>'
+					).appendTo('#recipeList');
+					console.log(response);
 				});
-				$('#recipeList').listview('refresh');
+            },
+            error: function(msg) {
+            	console.log("Error.");
+            	console.log(msg);
             }
-            
         });
     });
     
-    $('#pork').on("click", function(){
-    	$('#recipeList').empty();
-	    console.log("Pork Data!!");
+	$('#porkNav').on("click", function(){
+	    console.log("Json Data!!");
+        $('#recipeList').empty();
         $.ajax({
             "url": '_view/pork',
+            "type": 'GET',
             "dataType": 'json',
-            "success": function(data){
+            "success": function(response){
 
-				$.each(data.rows, function(index, recipe) {
-					var RecipeName = recipe.value.RecipeName;
-					$('#recipeList').append(
-						$('<li>').append(
-							$('<a>').attr("href", "#")
-								.text(RecipeName)
-						)
-					);
+				$.each(response.rows, function(index, recipe) {
+					$(''+
+						'<div>' +
+							'<p>' + recipe.value.RecipeName +'</p>' +
+							'<p>' + 'Rating: ' + recipe.value.Rating +'</p>' +
+							'<p>' + 'Meal Time: ' + recipe.value.MealTime +'</p>' +
+							'<p>' + 'Directions: ' + recipe.value.Directions +'</p>' +
+							'<hr />' +
+						'</div>'
+					).appendTo('#recipeList');
+					console.log(response);
 				});
-				$('#recipeList').listview('refresh');
+            },
+            error: function(msg) {
+            	console.log("Error.");
+            	console.log(msg);
             }
-            
         });
     });
     
-    $('#veggie').on("click", function(){
-    	$('#recipeList').empty();
-	    console.log("Veggie Data!!");
+	$('#veggieNav').on("click", function(){
+	    console.log("Json Data!!");
+        $('#recipeList').empty();
         $.ajax({
             "url": '_view/veggie',
+            "type": 'GET',
             "dataType": 'json',
-            "success": function(data){
+            "success": function(response){
 
-				$.each(data.rows, function(index, recipe) {
-					var RecipeName = recipe.value.RecipeName;
-					$('#recipeList').append(
-						$('<li>').append(
-							$('<a>').attr("href", "#")
-								.text(RecipeName)
-						)
-					);
+				$.each(response.rows, function(index, recipe) {
+					$(''+
+						'<div>' +
+							'<p>' + recipe.value.RecipeName +'</p>' +
+							'<p>' + 'Rating: ' + recipe.value.Rating +'</p>' +
+							'<p>' + 'Meal Time: ' + recipe.value.MealTime +'</p>' +
+							'<p>' + 'Directions: ' + recipe.value.Directions +'</p>' +
+							'<hr />' +
+						'</div>'
+					).appendTo('#recipeList');
+					console.log(response);
 				});
-				$('#recipeList').listview('refresh');
+            },
+            error: function(msg) {
+            	console.log("Error.");
+            	console.log(msg);
             }
-            
         });
-    });
+    });;
     
-    $('#date').on("click", function(){
-    	$('#recipeList').empty();
-	    console.log("Date Data!!");
+    $('#allrecipes').on("click", function(){
+	    console.log("All Data!!");
+        $('#recipeList').empty();
         $.ajax({
-            "url": '_view/date',
+            "url": '_view/all',
+            "type": 'GET',
             "dataType": 'json',
-            "success": function(data){
+            "success": function(response){
 
-				$.each(data.rows, function(index, recipe) {
-					var RecipeName = recipe.value.RecipeName;
-					$('#recipeList').append(
-						$('<li>').append(
-							$('<a>').attr("href", "#")
-								.text(RecipeName)
-						)
-					);
+				$.each(response.rows, function(index, recipe) {
+					$(''+
+						'<div>' +
+							'<p>' + recipe.value.RecipeName +'</p>' +
+							'<p>' + 'Rating: ' + recipe.value.Rating +'</p>' +
+							'<p>' + 'Meal Time: ' + recipe.value.MealTime +'</p>' +
+							'<p>' + 'Directions: ' + recipe.value.Directions +'</p>' +
+							'<hr />' +
+						'</div>'
+					).appendTo('#recipeList');
+					console.log(response);
 				});
-				$('#recipeList').listview('refresh');
+            },
+            error: function(msg) {
+            	console.log("Error.");
+            	console.log(msg);
             }
-            
         });
     });
     
     
-    
+	   
     
 });
