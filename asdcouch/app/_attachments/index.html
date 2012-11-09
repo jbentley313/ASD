@@ -70,12 +70,12 @@
 						<h3>Veggie</h3>
 					</p>
 				</a></li>
-				<li><a href="#byDate" id="dateNav" data-transition="slide">
+				<!-- <li><a href="#byDate" id="dateNav" data-transition="slide">
 					<p class="my_icon_wrapper">
 						<img src="images/dateIcon.png">
 						<h3>Date Added</h3>
 					</p>
-				</a></li>
+				</a></li> -->
 			</ul>
 		</div>
 
@@ -84,14 +84,13 @@
 			<div data-role="navbar">
 				<ul>
 					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
 				</ul>
 
 			</div>
 		</div>
 
 	</div>
-	<div data-role="page" id="display1" data-add-back-btn="true" data-theme="a">
+	<!-- <div data-role="page" id="display1" data-add-back-btn="true" data-theme="a">
 		
 
 		<div data-role="content" id="displayTarget">
@@ -115,10 +114,10 @@
 			</div>
 		</div>
 		
-	</div>
+	</div> -->
 
 	<!-- remote data landing page (for now) -->
-	<div data-role="page" id="remoteData" data-add-back-btn="true" data-theme="a">
+	<div data-role="page" id="remoteData" data-add-back-btn="true" data-theme="d">
 
 		<div data-role="header" data-position="fixed">
 			<h1>Browse Recipes</h1>
@@ -133,206 +132,12 @@
 			<div data-role="navbar">
 				<ul>
 					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
 				</ul>
 
 			</div>
 		</div>
 
 	</div>
-
-	<!-- Recipe By Date Page-->
-	<div data-role="page" id="byDate" data-add-back-btn="true" data-theme="a">
-
-		<div data-role="header" data-position="fixed">
-			<h1>By Date</h1>
-			<p class="my_icon_wrapperBr">
-				<img src="images/sushi2.png" height="30" width="70">
-			</p>
-		</div>
-
-		<div data-role="content">
-
-			<ul data-role="listview">
-				<li><a href="#chickenCr" data-transition="slide">
-				<h3>Chicken Crecents</h3>
-				<p>added 2012-07-11</p>
-				</a></li>
-				<li><a href="#PepBr" data-transition="slide">
-				<h3>Pepperoni Bread</h3>
-				<p>added 2012-07-03</p>
-				</a></li>
-				<li><a href="#chili" data-transition="slide">
-				<h3>Chili</h3>
-				<p>added 2012-06-28</p>
-				</a></li>
-				<li><a href="#ribs" data-transition="slide">
-				<h3>Smoked Ribs</h3>
-				<p>added 2012-03-04</p>
-				</a></li>
-			</ul>
-		</div>
-
-		<div data-role="footer" data-position="fixed" data-id="home" data-theme="b">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
-				</ul>
-
-			</div>
-		</div>
-
-	</div>
-
-	<!--Data Page-->
-	<div data-role="page" id="data"  data-theme="a" data-add-back-btn="true">
-
-		<div data-role="header" data-position="fixed">
-			<h1>Data</h1>
-			<p class="my_icon_wrapperBr">
-				<img src="images/sushi2.png" height="30" width="70">
-			</p>
-		</div>
-		<div data-role="content">
-        	<div>
-        		<input id="Json" type="button" value="Load JSON" data-theme="a" />
-        	</div>
-        	<div>
-	        	<input id="CSV" type="button" value="Load CSV" data-theme="a" />
-        	</div>
-        	<div>
-	        	<input id="XML" type="button" value="Load XML" data-theme="a" />
-        	</div>	
-				<div id="LoadedData">
-				</div>
-        </div>	
-		
-
-		<div data-role="footer" data-position="fixed" data-id="home" data-theme="b">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
-				</ul>
-
-			</div>
-		</div>
-
-	</div>
-
-	<!--Chicken Recipe landing page (for now) -->
-	<div data-role="page" id="chickenCr" data-add-back-btn="true">
-
-		<div data-role="header" data-position="fixed">
-			<h1>Crecents!</h1>
-			<p class="my_icon_wrapperBr">
-				<img src="images/sushi2.png" height="30" width="70">
-			</p>
-		</div>
-
-		<div data-role="content">
-			<h3>Chicken Crecents</h3>
-			<p>This Recipe Coming Soon!</p>
-			
-		</div>
-
-		<div data-role="footer" data-position="fixed" data-id="home" data-theme="b">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
-				</ul>
-
-			</div>
-		</div>
-
-	</div>
-
-	<!--Pepperoni Bread Recipe landing page (for now) -->
-	<div data-role="page" id="PepBr" data-add-back-btn="true">
-
-		<div data-role="header" data-position="fixed">
-			<h1>Bread!</h1>
-			<p class="my_icon_wrapperBr">
-				<img src="images/sushi2.png" height="30" width="70">
-			</p>
-		</div>
-
-		<div data-role="content">
-			<h3>Pepperoni Bread</h3>
-			<p>This Recipe Coming Soon!</p>
-			
-		</div>
-
-		<div data-role="footer" data-position="fixed" data-id="home" data-theme="b">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
-				</ul>
-
-			</div>
-		</div>
-
-	</div>
-
-	<!--Chili Recipe landing page (for now) -->
-	<div data-role="page" id="chili" data-add-back-btn="true">
-		<div data-role="header" data-position="fixed">
-			<h1>Chili!</h1>
-			<p class="my_icon_wrapperBr">
-				<img src="images/sushi2.png" height="30" width="70">
-			</p>
-		</div>
-
-		<div data-role="content">
-			<h3>Chili</h3>
-			<p>This Recipe Coming Soon!</p>
-			
-		</div>
-
-		<div data-role="footer" data-position="fixed" data-id="home" data-theme="b">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
-				</ul>
-
-			</div>
-		</div>
-
-	</div>
-
-	<!--Rib Recipe landing page (for now) -->
-	<div data-role="page" id="ribs" data-add-back-btn="true">
-
-		<div data-role="header" data-position="fixed">
-			<h1>Ribs!</h1>
-			<p class="my_icon_wrapperBr">
-				<img src="images/sushi2.png" height="30" width="70">
-			</p>
-		</div>
-
-		<div data-role="content">
-			<h3>Smoked Ribs</h3>
-			<p>This Recipe Coming Soon!</p>
-			
-		</div>
-
-		<div data-role="footer" data-position="fixed" data-id="home" data-theme="b">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
-				</ul>
-
-			</div>
-		</div>
-
-	</div>
-
-
 
 	<!-- Recipe Form -->
 	<div data-role="page" id="addRecipe" data-add-back-btn="true">
@@ -346,7 +151,7 @@
 
 	<div data-role="content" data-theme="a">
 
-		<form action="" method="post" id="addRecipeForm">
+		<form action="" method="" id="addRecipeForm">
 
 			<div data-role="fieldcontain">
 				<label for="recipename">Recipe Name:</label>
@@ -411,7 +216,6 @@
 			<div data-role="navbar">
 				<ul>
 					<li><a href="#home" data-icon="home">Home</a></li>
-					<li><a href="#data" data-icon="star">Data</a></li>
 				</ul>
 
 			</div>

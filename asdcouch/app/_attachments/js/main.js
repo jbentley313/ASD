@@ -10,7 +10,7 @@ $("#home").on("pageinit", function(){
 
 
 	$('#chickenNav').on("click", function(){
-	    console.log("Json Data!!");
+	    console.log("Chicken Data!!");
         $('#recipeList').empty();
         $.ajax({
             "url": '_view/chicken',
@@ -39,7 +39,7 @@ $("#home").on("pageinit", function(){
     });	
     
 	$('#beefNav').on("click", function(){
-	    console.log("Json Data!!");
+	    console.log("Beef Data!!");
         $('#recipeList').empty();
         $.ajax({
             "url": '_view/beef',
@@ -68,7 +68,7 @@ $("#home").on("pageinit", function(){
     });
     
 	$('#porkNav').on("click", function(){
-	    console.log("Json Data!!");
+	    console.log("Pork Data!!");
         $('#recipeList').empty();
         $.ajax({
             "url": '_view/pork',
@@ -97,7 +97,7 @@ $("#home").on("pageinit", function(){
     });
     
 	$('#veggieNav').on("click", function(){
-	    console.log("Json Data!!");
+	    console.log("Veggie Data!!");
         $('#recipeList').empty();
         $.ajax({
             "url": '_view/veggie',
@@ -108,7 +108,7 @@ $("#home").on("pageinit", function(){
 				$.each(response.rows, function(index, recipe) {
 					$(''+
 						'<div>' +
-							'<p>' + recipe.value.RecipeName +'</p>' +
+							'<span>' + recipe.value.RecipeName +'</span>' +
 							'<p>' + 'Rating: ' + recipe.value.Rating +'</p>' +
 							'<p>' + 'Meal Time: ' + recipe.value.MealTime +'</p>' +
 							'<p>' + 'Directions: ' + recipe.value.Directions +'</p>' +
@@ -153,8 +153,5 @@ $("#home").on("pageinit", function(){
             }
         });
     });
-    
-    
-	   
-    
+        
 });
