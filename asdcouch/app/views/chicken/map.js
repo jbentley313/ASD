@@ -1,6 +1,7 @@
 function(doc) {
   if (doc.Group === "chicken") {
     emit(doc.Group, {
+    	"Recipe": doc._id,
     	"RecipeName": doc.RecipeName,
     	"Group": doc.Group,
     	"Rating": doc.Rating,

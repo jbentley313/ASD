@@ -3,35 +3,35 @@
 //Project 4
 
 
-
-$(document).on("pageshow", "#recipeListPage", function() {
+var urlVars = function() {
 	var urlData = $($.mobile.activePage).data("url");
 	var urlParts = urlData.split('?');
-	var urlKey = urlParts[1]
-	console.log(urlKey);
-	
+	var urlPairs = urlParts[1].split('&');
+	var urlValues = {};
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	return urlValues;
+};
+
+$(document).on("pageshow", "#recipeListPage", function() {
+	var cat = urlVars()["cat"];
 	$('#recipeList').empty();
-	$.couch.db("asdproject").view("recipekeeper/" + urlKey, {
-		
-		
+	$.couch.db("asdproject").view("recipekeeper/" + cat, {
 		"success": function(response){
-			
 			console.log(response);
-			
-			
 			$.each(response.rows, function(index, recipe) {
 					var RecipeName = recipe.value.RecipeName;
 					var Rating = recipe.value.Rating;
 					var MealTime = recipe.value.MealTime;
 					var Directions = recipe.value.Directions;
+					var Recipe = recipe.value.Recipe
 					$('#recipeList').append(
 						$('<li>').append(
-							$('<a>').attr("href", "#").text(RecipeName).append(
-								$('<p>').text('.'),
-								$('<p>').text('Rating: ' + Rating),
-								$('<p>').text('Meal Time: ' + MealTime),
-								$('<p>').text('Directions: ' + Directions)
-							)
+							$('<a>').attr("href", "detailsPage.html?recipe=" + Recipe).text(RecipeName)
 						)
 					);
 				});
@@ -45,6 +45,62 @@ $(document).on("pageshow", "#recipeListPage", function() {
 	});
 	
 });
+
+$(document).on("pageshow", "#detailsPage", function() {
+	var recipeT = urlVars()["recipe"];
+	
+	$('#details').empty();
+	$.couch.db("asdproject").openDoc(recipeT, {
+		key: recipeT,
+		"success": function(data) {
+			var RecipeName = data.RecipeName;
+			var Rating = data.Rating;
+			$('#details').append(
+					$('<p>').text(RecipeName),
+					$('<p>').text(Rating)
+				);
+
+	
+		}
+		
+	});
+
+});
+//	var recipeT = urlVars()["recipe"];
+//	$('#details').empty();
+//	$.couch.db("asdproject").view("recipekeeper/all", {
+//	
+//			key: recipeT,
+//			"success": function(data){
+//				console.log(data);
+//				console.log(recipeT);
+//				$.each(data.rows, function(index, recipe) {
+//						var RecipeName = recipe.value.RecipeName;
+//						var Rating = recipe.value.Rating;
+//						var MealTime = recipe.value.MealTime;
+//						var Directions = recipe.value.Directions;
+//						var Recipe = recipe.value.Recipe
+//						$('#details').append(
+//							$('<li>').append(
+//								$('<a>').attr("href", "#").text(RecipeName).append(
+//									$('<p>').text('.'),
+//									$('<p>').text('Rating: ' + Rating),
+//									$('<p>').text('Meal Time: ' + MealTime),
+//									$('<p>').text('Directions: ' + Directions)
+//								)
+//							)
+//						);
+//					});
+//					$('#details').listview('refresh');
+//					
+//	            },
+//	            error: function(msg) {
+//	            	console.log("Error.");
+//	            	console.log(msg);
+//	            }
+//		});
+		
+	
 
 
 
