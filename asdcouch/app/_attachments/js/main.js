@@ -53,12 +53,19 @@ $(document).on("pageshow", "#detailsPage", function() {
 	$.couch.db("asdproject").openDoc(recipeT, {
 		key: recipeT,
 		"success": function(data) {
+			var RecId = data._id;
+			var RecRev = data._rev;
 			var RecipeName = data.RecipeName;
 			var Rating = data.Rating;
+			var MealTime = data.MealTime;
+			var Directions = data.Directions
+			console.log(RecRev);
 			$('#details').append(
-					$('<p>').text(RecipeName),
-					$('<p>').text(Rating)
-				);
+					$('<h2>').text(RecipeName),
+					$('<p>').text("Rating: " + Rating),
+					$('<p>').text("Meal time: " + MealTime),
+					$('<p>').text("Directions: " + Directions)
+			);
 
 	
 		}
