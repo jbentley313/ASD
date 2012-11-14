@@ -8,36 +8,66 @@
 //Wait until the DOM is ready
 $(document).on("pageinit", function(){
 
-	var arform = $("#addRecipeForm");
-	arform.validate({
-		invalidHandler: function(form, validator){
-
-		},
-		submitHandler: function(){
-			var data = arform.serializeArray();
-			localStorage.setItem("arform", data);
-			parseRecipeForm(data);
-			storeData();
-			
-
-		}
-	});
+	
 
 
 	$('#addRecipe').on('pageinit', function() {
 		var save = $("#submit");
-		save.on("click", storeData);
+		save.on("click", function(){
+			var arform = $("#addRecipeForm");
+			arform.validate({
+				invalidHandler: function(form, validator){
+				},
+				submitHandler: function(){
+					var data = arform.serializeArray();
+					parseRecipeForm(data);
+					function storeData(key){
+			
+					function getCheckboxValues(){
+			 		var	checkBoxes = $(":checkbox");
+					tcheckedBoxes = [];
+					for(var i=0; i<checkBoxes.length; i++){
+						if(checkBoxes[i].checked){
+						newSelected = checkBoxes[i].value;
+						tcheckedBoxes.push(newSelected);
+						}
+				
+
+					}
+		
+
+
+				}
+				getCheckboxValues();
+	
+				//Get all of our form field value and store in an object.
+				//Object properties contain array with the form label and input values.
+				var item 			= {};
+					item.recipename	= ["Recipe Name:", $("#recipename").val()];
+					item.groups 	= ["Group: ",$("#groups").val()];
+					item.rating		= ["Rating: ", $("#rating").val()];
+					item.date		= ["Date Added: ", $("#date").val()];
+					item.checks 	= ["Meal Time: " , tcheckedBoxes];
+					item.directions = ["Directions: ", $("#directions").val()];
+				//Save data into Local Storage: Use Stringify to convert the object to a string.
+				localStorage.setItem(id, JSON.stringify(item));
+				alert("Recipe Saved!");
+	
+				
+	
+			}
+		});
+					storeData();
+					
+		
+				}
+	});
+		
+		
+		});
 
 		function storeData(key){
-			//if no key, means brand new item that needs a key
-			if(!key){
-				var id 			= Math.floor(Math.random()*100000001);
-			}else{
-				//set id to existing key we are editing to save OVER data
-				//the key is same key that's been passed along from editSubmit event handler
-				//to the validate function, then passed here, into storeData function
-				id = key;
-			}
+			
 			function getCheckboxValues(){
 			 	var	checkBoxes = $(":checkbox");
 					tcheckedBoxes = [];
