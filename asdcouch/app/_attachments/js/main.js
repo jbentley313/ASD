@@ -74,9 +74,19 @@ $(document).on("pageshow", "#detailsPage", function() {
 			$('#deleteButton').on('click', function() {
 				var ask = confirm("Are you sure you want to delete this recipe?");
 				if(ask){
-					localStorage.removeItem(this.key);
-					alert("Recipe was deleted!");
-					$("#display1").listview("refresh");
+					var doc = {
+						    _id: RecId,
+						    _rev: RecRev
+						};
+						$.couch.db("asdproject").removeDoc(doc, {
+						     success: function(data) {
+						    	 alert('Recipe Deleted Yo!')
+						         console.log(data);
+						    },
+						    error: function(status) {
+						        console.log(status);
+						    }
+						});
 
 
 				}else{
