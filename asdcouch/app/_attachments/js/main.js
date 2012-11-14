@@ -56,7 +56,6 @@ $(document).on("pageshow", "#detailsPage", function() {
 			var RecId = data._id;
 			var RecRev = data._rev;
 			var RecipeName = data.RecipeName;
-//			var MealType = data.MealType;
 			var Rating = data.Rating;
 			var Group = data.Group;
 			var Directions = data.Directions
@@ -71,7 +70,6 @@ $(document).on("pageshow", "#detailsPage", function() {
 				$('#rating').val(Rating);
 				$('#groups').val(Group);
 				$('#directions').val(Directions);
-//				$('#mealType').val(MealType)
 			});
 			$('#deleteButton').on('click', function() {
 				var ask = confirm("Are you sure you want to delete this recipe?");
@@ -94,9 +92,8 @@ $(document).on("pageshow", "#detailsPage", function() {
 });
 
 $(document).on('pageshow', "#addRecipe", function() {
-	alert("yes");
 	function storeData(){
-		alert('fired');
+		alert('StoreDatafired');
 
 	//Get all of our form field value and store in an object.
 	//Object properties contain array with the form label and input values.
@@ -107,7 +104,6 @@ $(document).on('pageshow', "#addRecipe", function() {
 		item.RecipeName	= $("#recipename").val();
 		item.Group 		= $("#groups").val();
 		item.Rating		= $("#rating").val();
-		item.date		= $("#date").val();
 		item.Directions = $("#directions").val();
 		console.log(item._id);
 	//Save data into Local Storage: Use Stringify to convert the object to a string.
