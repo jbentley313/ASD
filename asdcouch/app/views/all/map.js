@@ -1,6 +1,7 @@
 function(doc) {
     emit(doc, {
     	"Recipe": doc._id,
+    	"RecipeRev": doc._rev,
     	"RecipeName": doc.RecipeName,
     	"Group": doc.Group,
     	"Rating": doc.Rating,

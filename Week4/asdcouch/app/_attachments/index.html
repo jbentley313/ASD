@@ -122,6 +122,9 @@
 	<div data-role="content" data-theme="a">
 
 		<form action="" method="" id="addRecipeForm">
+		
+		<input type="hidden" id="id" >
+		<input type="hidden" id="rev" >
 
 			<div data-role="fieldcontain">
 				<label for="recipename">Recipe Name:</label>
@@ -138,35 +141,20 @@
 				<select name="groups" id="groups" data-native-menu="false"  data-theme="a"  class="required">
 					<option data-placeholder="true">Please Select One</option>
 					<optgroup label="Meal Type:">
-						<option value="Chicken">Chicken</option>
-						<option value="Beef">Beef</option>
-						<option value="Pork">Pork</option>
-						<option value="Veggie">Veggie</option>
+						<option value="chicken">Chicken</option>
+						<option value="beef">Beef</option>
+						<option value="pork">Pork</option>
+						<option value="veggie">Veggie</option>
 					</optgroup>
 				</select>
 			</div>
 
-			<div data-role="fieldcontain">
+			<!-- <div data-role="fieldcontain">
 				<label for="date">Date Added</label>
 				<input name="date" id="date" type="date" data-role="datebox" data-options='{"mode": "calbox"}' data-theme="a">	
-			</div>
+			</div> -->
 
 			
-
-			<div data-role="fieldcontain">
-				<fieldset data-role="controlgroup" >
-					<legend>Meal Time:</legend>
-					<input type="checkbox" value="appetizer" name="mealTime" id="appetizer" data-theme="a"/>
-					<label for="appetizer">Appetizer</label>
-					<input type="checkbox" value="breakfast" name="mealTime" id="breakfast" data-theme="a"/>
-					<label for="breakfast">Breakfast</label>
-					<input type="checkbox" value="lunch" name="mealTime" id="lunch" data-theme="a"/>
-					<label for="lunch">Lunch</label>
-					<input type="checkbox" value="dinner" name="mealTime" id="dinner" data-theme="a"/>
-					<label for="dinner">Dinner</label>
-				</fieldset>		
-			</div>
-
 			
 
 			<div data-role="fieldcontain" >
