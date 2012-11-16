@@ -74,8 +74,8 @@ $(document).on("pageshow", "#detailsPage", function() {
 				$('#rating').val(Rating);
 				$('#groups').val(Group);
 				$('#directions').val(Directions);
-				console.log("edit id: " + RecId);
-				console.log("edit rev: " + RecRev);
+//				console.log("edit id: " + RecId);
+//				console.log("edit rev: " + RecRev);
 			});
 			$('#deleteButton').on('click', function() {
 				var ask = confirm("Are you sure you want to delete this recipe?");
@@ -122,25 +122,28 @@ $(document).on('pageshow', "#addRecipe", function() {
 		item.Group 		= $("#groups").val();
 		item.Rating		= $("#rating").val();
 		item.Directions = $("#directions").val();
-		console.log("store id: " + item._id);
-		console.log("store rev: " + item._rev);
+//		console.log("store id: " + item._id);
+//		console.log("store rev: " + item._rev);
 
 	//Save data 
 		var idcheck = item._id;
-		if (idcheck == "") {
-			alert('id and rev not defined!!!!');
+		if (idcheck === "") {
+//			alert('id and rev not defined!!!!');
 			delete item._id;
 			delete item._rev;
 		}
-		$.couch.db("asdproject").saveDoc(  
-				  item	  
-//				  {success: function() { alert("Saved ok."); }}  
-				);  
-	alert("Recipe Saved!");
+		$.couch.db("asdproject").saveDoc( item,	{
+			success: function(data) {
+				alert("Recipe Saved!"); 
+				window.location.reload();
+			},
+			error: function(status) {
+		        console.log(status);
+		    }
+		});
 
 
-
-}
+	}
 	var save = $("#submit");
 	save.on("click", function(){
 		var arform = $("#addRecipeForm");
